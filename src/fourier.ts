@@ -1,5 +1,5 @@
 import { maxHarmonics } from "./nyquist.ts"
-import type { Curve } from "./types.ts"
+import type { Curve, Coefficients } from "./types.ts"
 
 /**
  * Analyzes a wave, as represented by an array of samples, and returns its real and imaginary coefficients.
@@ -9,7 +9,7 @@ import type { Curve } from "./types.ts"
 export function fourier(curve: Curve, {
     harmonics = 100,
     threshold = 0.01
-} = {}) {
+} = {}): Coefficients {
     const real = new Float32Array(harmonics)
     const imaginary = new Float32Array(harmonics)
     const sampleRate = curve.length
