@@ -16,7 +16,7 @@ export function fourier(curve: Curve, {
 
     const analyzableHarmonics = Math.min(maxHarmonics(curve.length), harmonics)
 
-    for (let h = 0; h < analyzableHarmonics; h++) {
+    for (let h = 1; h < analyzableHarmonics; h++) {
         for (let i = 0; i < sampleRate; i++) {
             const phi = Math.PI * 2 * h * (i + 0.5) / sampleRate
             real[h] += Math.cos(phi) * curve[i]
@@ -27,5 +27,9 @@ export function fourier(curve: Curve, {
         if (Math.abs(real[h]) < threshold) real[h] = 0
         if (Math.abs(imaginary[h]) < threshold) imaginary[h] = 0
     }
+    for (let i = 0; i < sampleRate; i++)
+        real[0] += curve[i]
+    real[0] /= sampleRate
+
     return { real, imaginary }
 }
