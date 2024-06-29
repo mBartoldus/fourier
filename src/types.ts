@@ -26,9 +26,9 @@ export interface InverseFourierOptions extends Partial<Coefficients> {
 /**
  * Options for analyzing a wave.
  * The number of coefficients in the output is determined by ```harmonics```, which defaults to 100.
- * The threshold by which small numbers are rounded to 0 is determined by ```cutoff```, which defaults to 0.01.
+ * The threshold by which small numbers are rounded to 0 is determined by ```threshold```, which defaults to 0.01.
  */
 export interface FourierOptions {
     harmonics?: number
-    cutoff?: number
+    threshold?: number
 }

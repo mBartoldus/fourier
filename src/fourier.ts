@@ -3,7 +3,7 @@ import type { Curve } from "./types.ts"
 
 export function fourier(curve: Curve, {
     harmonics = 100,
-    cutoff = 0.01
+    threshold = 0.01
 } = {}) {
     const real = new Float32Array(harmonics)
     const imaginary = new Float32Array(harmonics)
@@ -19,8 +19,8 @@ export function fourier(curve: Curve, {
         }
         real[h] *= 2 / sampleRate
         imaginary[h] *= 2 / sampleRate
-        if (Math.abs(real[h]) < cutoff) real[h] = 0
-        if (Math.abs(imaginary[h]) < cutoff) imaginary[h] = 0
+        if (Math.abs(real[h]) < threshold) real[h] = 0
+        if (Math.abs(imaginary[h]) < threshold) imaginary[h] = 0
     }
     return { real, imaginary }
 }
