@@ -1,7 +1,7 @@
 A small library for performing discrete fourier transforms and inverse fourier
 transforms.
 
-##fourier
+## fourier
 The fourier function returns the real and imaginary coefficients of a given curve.
 ```javascript
 // a sine wave whose wavelength spans the array
@@ -22,7 +22,7 @@ fourier(sine)
 // }
 ```
 
-##inverseFourier
+## inverseFourier
 The inverseFourier function reconstructs a curve from the given real and/or imaginary coefficients.
 ```javascript
 // imaginary coefficients of a square wave
