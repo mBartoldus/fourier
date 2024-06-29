@@ -9,7 +9,7 @@ import type { Curve, Coefficients } from "./types.ts"
 export function fourier(curve: Curve, {
     harmonics = 100,
     threshold = 0.01
-} = {}): Coefficients {
+} = {}): { real: Float32Array, imaginary: Float32Array } {
     const real = new Float32Array(harmonics)
     const imaginary = new Float32Array(harmonics)
     const sampleRate = curve.length
