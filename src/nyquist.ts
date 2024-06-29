@@ -1,6 +1,6 @@
 /**
  * The nyquist frequency is half the sample rate.
- * The 0th coefficient is the DC offset, and therefore the maximum number of coefficients is:
+ * The 0th coefficient is the DC offset, and therefore the maximum number of harmonics is:
  * ```(sampleRate/2)+1```
  */
 export function maxHarmonics(sampleRate: number) {
