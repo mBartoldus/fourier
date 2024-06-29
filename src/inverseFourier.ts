@@ -5,7 +5,7 @@ export function inverseFourier({
     real = [],
     imaginary = [],
     sampleRate = 100
-}: InverseFourierOptions) {
+}: InverseFourierOptions): Float32Array {
     const curve = new Float32Array(sampleRate)
     const harmonics = Math.max(real.length, imaginary.length)
     for (let i = 0; i < sampleRate; i++) {
