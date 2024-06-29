@@ -1,6 +1,11 @@
 import { maxHarmonics } from "./nyquist.ts"
 import type { Curve } from "./types.ts"
 
+/**
+ * Analyzes a wave, as represented by an array of samples, and returns its real and imaginary coefficients.
+ * - Can specify the number of harmonics to output, though harmonics above the nyquist limit will be 0.
+ * - Can also specify the threshold by which small numbers are rounded to 0.
+ */
 export function fourier(curve: Curve, {
     harmonics = 100,
     threshold = 0.01
