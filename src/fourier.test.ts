@@ -30,3 +30,19 @@ Deno.test('fourier: should accurately recreate coefficients from inverseFourier'
     const actual = fourier(inverted, { harmonics })
     assertSameCoefficients(actual, expected)
 })
+
+Deno.test('fourier: should accurately recreate coefficients from random inverseFourier', () => {
+    const sampleRate = 100
+    const harmonics = 50
+    const expected = {
+        real: new Float32Array(harmonics),
+        imaginary: new Float32Array(harmonics),
+    }
+    for(let i = 0;i<sampleRate; i++) {
+        expected.real[i] = (Math.random() * 2)-1
+        expected.real[i] = (Math.random() * 2)-1
+    }
+    const inverted = inverseFourier({ ...expected, sampleRate })
+    const actual = fourier(inverted, { harmonics })
+    assertSameCoefficients(actual, expected)
+})
