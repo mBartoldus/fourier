@@ -15,6 +15,8 @@ fourier(sine, { harmonics: 2 })
 //     imaginary: [0, -1]
 // }
 
+// if the number of harmonics is not specified,
+// the function will return 100 harmonics by default.
 fourier(sine)
 // returns {
 //     real: [0, 0, 0, 0, 0, 0, 0, 0 ...],
@@ -33,6 +35,8 @@ for (let i = 1; i < imaginary.length; i += 2)
 inverseFourier({ imaginary, sampleRate: 4 })
 // returns [-1, -1, 1, 1]
 
+// if the sampleRate is not specified,
+// the function will return an array of length 100.
 inverseFourier({ imaginary })
 // returns [-1, -1, -1, -1, -1, -1, -1, ...]
 ```
