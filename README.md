@@ -1,9 +1,10 @@
 A small library for performing discrete fourier transforms and inverse fourier
 transforms.
 
+##fourier
 The fourier function returns the real and imaginary coefficients of a given curve.
 ```javascript
-// a sine wave whose wave is the length of the array
+// a sine wave whose wavelength spans the array
 const sine = new Float32Array(100);
 for (let i = 0; i < sine.length; i++)
     sine[i] = Math.PI * 2 * i / sine.length
@@ -21,6 +22,7 @@ fourier(sine)
 // }
 ```
 
+##inverseFourier
 The inverseFourier function reconstructs a curve from the given real and/or imaginary coefficients.
 ```javascript
 // imaginary coefficients of a square wave
