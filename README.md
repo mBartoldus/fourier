@@ -35,7 +35,7 @@ for (let i = 1; i < imaginary.length; i += 2)
 inverseFourier({ imaginary, sampleRate: 4 })
 // returns [-1, -1, 1, 1]
 ```
-If the sampleRate is not specified, the function will return an array of length 100.
+If the sampleRate is not specified, the function will return an array of length 100 by default.
 ```javascript
 inverseFourier({ imaginary })
 // returns [-1, -1, -1, -1, -1, -1, -1, ...]
