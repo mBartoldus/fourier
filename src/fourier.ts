@@ -1,5 +1,5 @@
 import { maxHarmonics } from "./nyquist.ts"
-import type { Curve, Coefficients } from "./types.ts"
+import type { Curve } from "./types.ts"
 
 /**
  * Analyzes a wave, as represented by an array of samples, and returns its real and imaginary coefficients.
