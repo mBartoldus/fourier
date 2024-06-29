@@ -10,3 +10,10 @@ for (const w of waveforms)
         const actual = inverseFourier({ ...coefficients[w](harmonics), sampleRate })
         assertSameCurve(actual, expected)
     })
+
+Deno.test('inverseFourier: should handle DC offset', () => {
+    const sampleRate = 100
+    const expected = new Float32Array(sampleRate).fill(1)
+    const actual = inverseFourier({ real: [1, 0], sampleRate })
+    assertSameCurve(actual, expected)
+})

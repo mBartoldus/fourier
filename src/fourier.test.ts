@@ -10,3 +10,13 @@ for (const w of waveforms)
         const actual = fourier(curves[w](sampleRate), { harmonics })
         assertSameCoefficients(actual, expected)
     })
+
+Deno.test('fourier: should handle DC offset', () => {
+    const flat = new Float32Array(100).fill(1)
+    const actual = fourier(flat, { harmonics: 5 })
+    const expected = {
+        real: [1, 0, 0, 0, 0],
+        imaginary: [0, 0, 0, 0, 0],
+    }
+    assertSameCoefficients(actual, expected)
+})
