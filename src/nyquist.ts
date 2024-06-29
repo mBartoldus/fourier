@@ -3,7 +3,7 @@
  * The 0th coefficient is the DC offset, and therefore the maximum number of harmonics is:
  * ```(sampleRate/2)+1```
  */
-export function maxHarmonics(sampleRate: number) {
+export function maxHarmonics(sampleRate: number): number {
     return Math.max(Math.floor(sampleRate / 2) + 1, 1)
 }
 
