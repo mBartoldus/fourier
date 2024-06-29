@@ -1,6 +1,10 @@
 import type { InverseFourierOptions } from "./types.ts"
 import { phi } from "./phi.ts"
 
+/**
+ * Recreates a wave, a represented by an array of samples, from its real and imaginary coefficients.
+ * - Can specify the ```sampleRate``` (the length of the returned ```Float32Array```).
+ */
 export function inverseFourier({
     real = [],
     imaginary = [],
