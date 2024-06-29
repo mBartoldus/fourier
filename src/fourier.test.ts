@@ -1,6 +1,7 @@
 import { fourier } from "./fourier.ts"
 import { assertSameCoefficients } from "./testing/assertions.ts";
 import { curves, coefficients, waveforms } from './testing/waves.ts'
+import { inverseFourier } from "./inverseFourier.ts";
 
 for (const w of waveforms)
     Deno.test(`fourier: should analyze ${w}`, () => {
@@ -18,5 +19,14 @@ Deno.test('fourier: should handle DC offset', () => {
         real: [1, 0, 0, 0, 0],
         imaginary: [0, 0, 0, 0, 0],
     }
+    assertSameCoefficients(actual, expected)
+})
+
+Deno.test('fourier: should accurately recreate coefficients from inverseFourier', () => {
+    const sampleRate = 100
+    const harmonics = 50
+    const expected = coefficients.square(harmonics)
+    const inverted = inverseFourier({ ...expected, sampleRate })
+    const actual = fourier(inverted, { harmonics })
     assertSameCoefficients(actual, expected)
 })
