@@ -4,11 +4,13 @@ import type { Curve } from "./types.ts"
 /**
  * Analyzes a wave, as represented by an array of samples, and returns its real and imaginary coefficients.
  * - Can specify the number of ```harmonics``` to output, though harmonics above the nyquist limit will be 0.
- * - Can also specify the ```threshold``` by which small numbers are rounded to 0.
+ * - Use ```roundToNearest``` to change the precision of the coefficients.
+ * - Or change the ```threshold``` by which small numbers are rounded to 0.
  */
 export function fourier(curve: Curve, {
     harmonics = 100,
-    threshold = 0.01
+    roundToNearest = 0.0001,
+    threshold = 0.01,
 } = {}): { real: Float32Array, imaginary: Float32Array } {
     const real = new Float32Array(harmonics)
     const imaginary = new Float32Array(harmonics)
@@ -24,12 +26,20 @@ export function fourier(curve: Curve, {
         }
         real[h] *= 2 / sampleRate
         imaginary[h] *= 2 / sampleRate
-        if (Math.abs(real[h]) < threshold) real[h] = 0
-        if (Math.abs(imaginary[h]) < threshold) imaginary[h] = 0
     }
     for (let i = 0; i < sampleRate; i++)
         real[0] += curve[i]
     real[0] /= sampleRate
+
+    const round = (n: number) => {
+        if (Math.abs(n) < threshold) return 0
+        if (roundToNearest) return Math.round(n / roundToNearest) * roundToNearest
+        return n
+    }
+    for (let h = 0; h < analyzableHarmonics; h++) {
+        real[h] = round(real[h])
+        imaginary[h] = round(imaginary[h])
+    }
 
     return { real, imaginary }
 }
