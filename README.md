@@ -1,3 +1,5 @@
+[![JSR](https://jsr.io/badges/@mbartoldus/fourier)](https://jsr.io/@mbartoldus/fourier)
+
 A small library for performing discrete fourier transforms and inverse fourier
 transforms.
 
