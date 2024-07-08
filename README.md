@@ -5,9 +5,9 @@ transforms.
 The fourier function returns the real and imaginary coefficients of a given curve.
 ```javascript
 // a sine wave whose wavelength spans the array
-const sine = new Float32Array(100);
+const sine = new Float32Array(1000);
 for (let i = 0; i < sine.length; i++)
-    sine[i] = Math.PI * 2 * i / sine.length
+    sine[i] = Math.sin(Math.PI * 2 * i / sine.length)
 
 fourier(sine, { harmonics: 2 })
 // returns {
