@@ -4,7 +4,7 @@ A small library for performing discrete fourier transforms and inverse fourier
 transforms.
 
 ## fourier
-The fourier function returns the real and imaginary coefficients of a given curve.
+The fourier function returns the real and imaginary coefficients of a given curve. The returned object also contains a `spectrum` property, which represents the magnitude of the wave's harmonics.
 ```javascript
 // a sine wave whose wavelength spans the array
 const sine = new Float32Array(1000);
@@ -15,6 +15,7 @@ fourier(sine, { harmonics: 2 })
 // returns {
 //     real: [0, 0],
 //     imaginary: [0, -1]
+//     spectrum: [0, 1]
 // }
 ```
 if the number of harmonics is not specified, the function will return 100 harmonics by default.
@@ -22,7 +23,8 @@ if the number of harmonics is not specified, the function will return 100 harmon
 fourier(sine)
 // returns {
 //     real: [0, 0, 0, 0, 0, 0, 0, 0 ...],
-//     imaginary: [0, -1, 0, 0, 0, 0 ...]
+//     imaginary: [0, -1, 0, 0, 0, 0 ...],
+//     spectrum: [0, 1, 0, 0, 0, 0 ...]
 // }
 ```
 
