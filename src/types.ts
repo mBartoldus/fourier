@@ -16,6 +16,16 @@ export interface Coefficients {
 }
 
 /**
+ * The fourier transform returns a wave represented as its real and imaginary coefficients.
+ * Additionally, the property "spectrum" represents the magnitude of each harmonic, regardless of phase.
+ */
+export interface FourierOutput extends Coefficients {
+    real: Float32Array
+    imaginary: Float32Array
+    spectrum: Float32Array
+}
+
+/**
  * Options for reconstructing a wave from its real and imaginary coefficients.
  * The length of the curve is determined by ```sampleRate```, which defaults to 100.
  */
