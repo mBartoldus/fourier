@@ -86,7 +86,7 @@ Deno.test('fourier: should set coefficients within a given threshold to zero', (
 
 Deno.test('fourier: should accurately recreate spectrum', () => {
     const sampleRate = 100
-    const harmonics = 5
+    const harmonics = 50
     const spectrum = new Float32Array(harmonics)
     for (let h = 0; h < harmonics; h++) spectrum[h] = Math.random()
 
