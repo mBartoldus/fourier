@@ -33,7 +33,7 @@ Deno.test('fourier: should accurately recreate coefficients from inverseFourier'
 
 Deno.test('fourier: should accurately recreate coefficients from random inverseFourier', () => {
     const sampleRate = 100
-    const harmonics = 5
+    const harmonics = 50
     const expected = {
         real: new Float32Array(harmonics),
         imaginary: new Float32Array(harmonics),
@@ -82,4 +82,25 @@ Deno.test('fourier: should set coefficients within a given threshold to zero', (
         real: [0.5, 0, 0, 0, 0],
         imaginary: [0, -1, 0, 0, 0],
     }, 0)
+})
+
+Deno.test('fourier: should accurately recreate spectrum', () => {
+    const sampleRate = 100
+    const harmonics = 5
+    const spectrum = new Float32Array(harmonics)
+    for (let h = 0; h < harmonics; h++) spectrum[h] = Math.random()
+
+    const coefficients = {
+        real: new Float32Array(sampleRate),
+        imaginary: new Float32Array(sampleRate)
+    }
+    for (let h = 1; h < harmonics; h++) {
+        coefficients.real[h] = ((h/harmonics)**0.5) * spectrum[h]
+        coefficients.imaginary[h] = ((1-(h/harmonics))**0.5) * spectrum[h]
+    }
+    coefficients.real[0] = spectrum[0]
+
+    const curve = inverseFourier({ ...coefficients, sampleRate })
+    const actual = fourier(curve, { harmonics })
+    assertSameCurve(actual.spectrum, spectrum)
 })

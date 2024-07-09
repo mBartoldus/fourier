@@ -1,5 +1,5 @@
 import { maxHarmonics } from "./nyquist.ts"
-import type { Curve, Coefficients, FourierOptions } from "./types.ts"
+import type { Curve, FourierOptions, FourierOutput } from "./types.ts"
 
 /**
  * Analyzes a wave, as represented by an array of samples, and returns its real and imaginary coefficients.
@@ -11,9 +11,10 @@ export function fourier(curve: Curve, {
     harmonics = 100,
     roundToNearest = 0.0001,
     threshold = 0.01,
-}: FourierOptions = {}): Coefficients {
+}: FourierOptions = {}): FourierOutput {
     const real = new Float32Array(harmonics)
     const imaginary = new Float32Array(harmonics)
+    const spectrum = new Float32Array(harmonics)
     const sampleRate = curve.length
 
     const analyzableHarmonics = Math.min(maxHarmonics(curve.length), harmonics)
@@ -31,6 +32,9 @@ export function fourier(curve: Curve, {
         real[0] += curve[i]
     real[0] /= sampleRate
 
+    for (let h = 0; h < analyzableHarmonics; h++)
+        spectrum[h] = Math.sqrt((real[h] ** 2) + (imaginary[h] ** 2))
+
     const round = (n: number) => {
         if (Math.abs(n) < threshold) return 0
         if (roundToNearest) return Math.round(n / roundToNearest) * roundToNearest
@@ -39,7 +43,8 @@ export function fourier(curve: Curve, {
     for (let h = 0; h < analyzableHarmonics; h++) {
         real[h] = round(real[h])
         imaginary[h] = round(imaginary[h])
+        spectrum[h] = round(spectrum[h])
     }
 
-    return { real, imaginary }
+    return { real, imaginary, spectrum }
 }
