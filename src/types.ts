@@ -30,5 +30,6 @@ export interface InverseFourierOptions extends Partial<Coefficients> {
  */
 export interface FourierOptions {
     harmonics?: number
+    roundToNearest?: number
     threshold?: number
 }
