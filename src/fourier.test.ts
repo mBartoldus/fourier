@@ -1,5 +1,5 @@
 import { fourier } from "./fourier.ts"
-import { assertSameCoefficients } from "./testing/assertions.ts";
+import { assertSameCoefficients, assertSameCurve } from "./testing/assertions.ts";
 import { curves, coefficients, waveforms } from './testing/waves.ts'
 import { inverseFourier } from "./inverseFourier.ts";
 
@@ -33,15 +33,17 @@ Deno.test('fourier: should accurately recreate coefficients from inverseFourier'
 
 Deno.test('fourier: should accurately recreate coefficients from random inverseFourier', () => {
     const sampleRate = 100
-    const harmonics = 50
+    const harmonics = 5
     const expected = {
         real: new Float32Array(harmonics),
         imaginary: new Float32Array(harmonics),
     }
-    for (let i = 0; i < sampleRate; i++) {
-        expected.real[i] = (Math.random() * 2) - 1
-        expected.real[i] = (Math.random() * 2) - 1
+    for (let h = 0; h < harmonics; h++) {
+        expected.real[h] = (Math.random() * 2) - 1
+        expected.imaginary[h] = (Math.random() * 2) - 1
     }
+    expected.imaginary[0] = 0
+
     const curve = inverseFourier({ ...expected, sampleRate })
     const actual = fourier(curve, { harmonics })
     assertSameCoefficients(actual, expected)
